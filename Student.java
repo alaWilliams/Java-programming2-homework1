@@ -79,7 +79,79 @@ public class Student {
     if (bachelorCredits >= ConstantValues.MIN_CREDITS && bachelorCredits <= ConstantValues.MAX_CREDITS) {
         this.bachelorCredits = bachelorCredits;
     }
-}
+};
+
+  public double getMasterCredits () {
+  return masterCredits;
+  };
+
+   public void setMasterCredits(final double masterCredits) {
+    if (masterCredits >= ConstantValues.MIN_CREDITS && ConstantValues.MASTER_CREDITS <= ConstantValues.MAX_CREDITS) {
+        this.masterCredits = masterCredits;
+    }
+};
+
+  public String getTitleOfMasterThesis(){
+    return titleOfMasterThesis;
+  };
+
+  public void setTitleOfMasterThesis(String title) {
+    if (title != null) {
+      this.titleOfMasterThesis = title;
+    }
+  };
+
+    public String getTitleOfBachelorThesis(){
+    return titleOfBachelorsThesis;
+  };
+
+  public void setTitleOfBachelorThesis(String title) {
+    if (title != null) {
+      this.titleOfBachelorsThesis = title;
+    }
+  };
+
+  public int getStartYear() {
+    return startYear;
+  };
+
+  public void setStartYear(final int startYear) {
+    if (startYear > 2000 && startYear <= java.time.Year.now().getValue()) {
+      this.startYear = startYear;
+    }
+  };
+   
+  public int getGraduationYear(){
+    return graduationYear;
+  };
+
+  private boolean canGraduate(){
+    return this.bachelorCredits >= ConstantValues.BACHELOR_CREDITS
+        && this.masterCredits >= ConstantValues.MASTER_CREDITS
+        && this.titleOfBachelorsThesis != ConstantValues.NO_TITLE
+        && this.titleOfMasterThesis != ConstantValues.NO_TITLE;
+  };
+
+  public String setGraduationYear(final int graduationYear) {
+    if (!canGraduate()) {
+      return "Check the required studies";
+    }
+    if (graduationYear < this.startYear || graduationYear > java.time.Year.now().getValue()) {
+      return "Check graduation year";
+    }
+    this.graduationYear = graduationYear;
+    return "Ok";
+  };
+  public boolean hasGraduated() {
+    return this.graduationYear != -1;
+  }
+
+
+
+
+
+
+
 
 
 
